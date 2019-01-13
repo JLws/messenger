@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.head-block {
+  background: black;
+  height: 10vh;
+
+  text-align: center;
+  color: white;
+}
+
+.head-block h2 {
+  margin: 0;
+}
+
+.main-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.5);
+  height: 90vh;
+
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttons button {
+  width: 15em;
+  border: black solid 0.1em;
+  margin: 1em;
+  background: white;
+
+  padding: .5em;
+  font-weight: bolder;
+}
+
+.buttons button:hover {
+  background: rgba(200,0,0,.6);
+  transform: scale(1.1);
+  transition: .5s;
+}
+
+.buttons button:active {
+  background: yellow;
+}
+
+.signup-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-block input {
+  margin: .6em;
+  width: 15em;
+}
+
+.signin-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-block input {
+  margin: .6em;
+  width: 15em;
+}
