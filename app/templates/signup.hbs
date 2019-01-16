@@ -13,13 +13,13 @@
       <div class="info-block">
         <h2>Sign up</h2>
       </div>
-      <div class="signup-block">
-        <input type="text" placeholder="Login">
-        <input type="text" placeholder="Password">
-        <input type="text" placeholder="Confirm password">
+      <form class="signup-block" action="/signup" method="POST">
+        <input type="text" name="username" placeholder="Login" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirmPassword" placeholder="Confirm password" required>
         <button>Sign up</button>
-        <p class="error">Error</p>
-      </div>
+        <p class="error">{{message}}</p>
+      </form>
   </div>
   <footer class="footer-block">
   </footer>
