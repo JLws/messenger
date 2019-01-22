@@ -20,7 +20,7 @@ module.exports = (passport) => {
           var confPass = req.body.confirmPassword
           if ( (password.length < 6 || password.length > 24) || (confPass.length < 6 || confPass.length > 24) ) {
             return done(err, false, req.flash('message', 'Password must contain 6-24 characters.'))
-          }
+            }
 
           if ( user ) {
             return done(err, false, req.flash('message', 'User already exists.'))

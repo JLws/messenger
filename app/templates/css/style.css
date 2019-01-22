@@ -69,3 +69,70 @@ body {
   margin: .6em;
   width: 15em;
 }
+
+
+.main-block-profile {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0,0,0,.5);
+  height: 90vh;
+
+}
+
+.profile-info {
+  flex-basis: 25%;
+  background: rgb(54,76,87);
+  box-shadow: inset 0 0 1em black;
+
+  text-align: center;
+}
+
+.friends-block {
+  flex-grow: 2;
+  background: rgba(34,23,43,1);
+  padding: 2em 8em 0 8em;
+}
+
+.menu-profile {
+  margin-top: 30%;
+  padding: 0;
+}
+
+.menu-profile li {
+  background: rgba(100,80,50);
+  margin: .25em 3em;
+
+  list-style: none;
+  cursor: pointer
+}
+
+.menu-profile li:hover {
+  opacity: .5;
+  transition: .5s;
+}
+
+.friends-search input {
+  width: 80%;
+}
+
+.friends-search button {
+  width: 18%;
+}
+
+.friends-list {
+  border-top: .5em solid black;
+  background: white;
+  margin-top: 1em;
+  max-height: 90.9%;
+  overflow: auto;
+
+  padding: .2em 0;
+}
+
+.friends-list li {
+  list-style: none;
+  background: rgb(54,113,66);
+  margin: .2em .4em;
+
+  padding: .2em 2em;
+}
