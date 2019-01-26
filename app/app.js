@@ -20,11 +20,11 @@ class App {
     Database(mongoose) // load db
     Authentication(this, passport) // implement authentication
     this.isAuthenticated = (request, response, next) => {
+      console.log(request)
       if( request.isAuthenticated() )
         return next()
       response.redirect('signin')
     }
-//    this.loadUser = (request, response)
     this.expressApp.use(cookieParser())
     this.loadRoutes() // init routes
   }
@@ -44,13 +44,18 @@ class App {
     })
 
     app.get('/profile', this.isAuthenticated, this.loadUser, (request, response) => {
-      response.render('profile', { username: request.currentUser.username })
+      let user = request.currentUser
+      response.render('profile', {
+        username: user.username,
+        name: user.name,
+        surname: user.surname
+      })
     })
 
     app.post('/signup', passport.authenticate('signup', {
         successRedirect: '/profile',
         failureRedirect: '/signup',
-        failureFlash : true
+        failureFlash: true
       })
     )
 
@@ -64,8 +69,26 @@ class App {
     app.post('/signin', passport.authenticate('login', {
       successRedirect: '/profile',
       failureRedirect: '/signin',
-      failureFlash : true
+      failureFlash: true
     }))
+
+    app.get('/signout', this.isAuthenticated, (request, response) => {
+      request.logout()
+      response.redirect('/')
+    })
+
+    app.get('/settings',this.isAuthenticated, this.loadUser, (request, response) => {
+      let user = request.currentUser
+      response.render('settings', {
+        login: user.username,
+        name: user.name,
+        surname: user.surname
+      })
+    })
+
+    app.post('/settings',this.isAuthenticated, this.loadUser, (request, response) => {
+      this.changeUser(request, response)
+    })
   }
 }
 

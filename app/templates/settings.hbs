@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A simple messenger</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="head-block">
+    <h2>A simple messenger</h2>
+  </header>
+  <div class="main-block-profile">
+    <div class="profile-info">
+      <h3>{{name}} {{surname}}</h3>
+      <p>{{login}}</p>
+      <ul class="menu-profile">
+        <p>Setting profile</p>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="signout">Exit</a></li>
+      </ul>
+    </div>
+    <form class="settings-block" method="POST">
+      <table>
+        <tr>
+          <td>Login:</td>
+          <td><input type="text" name="login" value="{{login}}" disabled></td>
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td><input type="text" name="name" value="{{name}}"></td>
+        </tr>
+        <tr>
+          <td>Surname:</td>
+          <td><input type="text" name="surname" value="{{surname}}"></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+          <td>Confirm Password:</td>
+          <td><input type="password" name="confirmPassword"></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button>Save</button></td>
+        </tr>
+        <tr>
+          <td colspan="2"><p class="error">{{error}}</p></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <footer class="footer-block">
+  </footer>
+</body>
+</html>

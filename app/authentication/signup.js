@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy
-const User = require('../models/user')
+const User = require('../db/models/user')
 const bcrypt = require('bcrypt-node')
 
 module.exports = (passport) => {
@@ -31,6 +31,8 @@ module.exports = (passport) => {
             var newUser = new User()
             newUser.username = username;
             newUser.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+            newUser.name = ''
+            newUser.surname = ''
             newUser.save( (err) => {
               if (err) {
                 console.log('Error ' + err)

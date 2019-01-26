@@ -70,7 +70,6 @@ body {
   width: 15em;
 }
 
-
 .main-block-profile {
   display: flex;
   justify-content: space-around;
@@ -96,6 +95,10 @@ body {
 .menu-profile {
   margin-top: 30%;
   padding: 0;
+}
+
+.menu-profile a {
+  text-decoration: none;
 }
 
 .menu-profile li {
@@ -135,4 +138,16 @@ body {
   margin: .2em .4em;
 
   padding: .2em 2em;
+}
+
+.settings-block {
+  flex-grow: 2;
+  background: rgba(34,23,43,1);
+  padding: 2em 8em 0 8em;
+
+  text-align: center;
+}
+
+.settings-block td {
+  padding: .2em 4em;
 }
