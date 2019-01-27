@@ -96,6 +96,27 @@ module.exports = (lexical, passport) => {
     })
   }
 
+  lexical.findUsers = (request, response) => {
+    User.find({ username: new RegExp(request.body.searchName, 'i') }, (err, users) => {
+      if (err) {
+        response.render('profile', {
+          username: request.currentUser.username,
+          name: request.currentUser.name,
+          surname: request.currentUser.surname,
+        })
+      } else {
+        var list = []
+        users.map(user => list.push(user.username))
+        response.render('profile', {
+          username: request.currentUser.username,
+          name: request.currentUser.name,
+          surname: request.currentUser.surname,
+          userList: list
+        })
+      }
+    })
+  }
+
   // init strategy
   login(passport)
   signup(passport)

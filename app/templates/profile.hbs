@@ -20,12 +20,16 @@
       </ul>
     </div>
     <div class="friends-block">
-      <form class="friends-search">
-        <input type="text">
+      <form class="friends-search" method="POST">
+        <input type="text" name="searchName" placeholder="Name friend">
         <button>Search</button>
       </form>
       <div class="friends-list">
-        <li>a friends - message</li>
+        {{#each userList}}
+          <li>{{this}}</li>
+        {{else}}
+          <li>You don't have friends.</li>
+        {{/each}}
       </div>
     </div>
   </div>

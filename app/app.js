@@ -20,7 +20,6 @@ class App {
     Database(mongoose) // load db
     Authentication(this, passport) // implement authentication
     this.isAuthenticated = (request, response, next) => {
-      console.log(request)
       if( request.isAuthenticated() )
         return next()
       response.redirect('signin')
@@ -50,6 +49,19 @@ class App {
         name: user.name,
         surname: user.surname
       })
+    })
+
+    app.post('/profile', this.isAuthenticated, this.loadUser, (request, response) => {
+      var user = request.currentUser
+      if ( request.body.searchName != '' ) {
+        this.findUsers(request, response)
+      } else {
+        response.render('profile', {
+          username: user.username,
+          name: user.name,
+          surname: user.surname
+        })
+      }
     })
 
     app.post('/signup', passport.authenticate('signup', {
