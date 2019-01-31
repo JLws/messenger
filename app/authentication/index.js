@@ -53,6 +53,13 @@ module.exports = (lexical, passport) => {
     }
   }
 
+  lexical.userUpdate = (username, user) => {
+    User.updateOne({ username: username }, user, (err, result) => {
+      if ( err ) return 'Error connecting.'
+      return 'Successful saved.'
+    })
+  }
+
   lexical.changeUser = (request, response) => {
     let user = request.currentUser
     var message = ''
@@ -113,6 +120,37 @@ module.exports = (lexical, passport) => {
           surname: request.currentUser.surname,
           userList: list
         })
+      }
+    })
+  }
+
+  lexical.showUser = (request, response) => {
+    User.findOne({ username: request.query.people }, (err, user) => {
+      if (err) {
+        response.render('profile', {
+          username: request.currentUser.username,
+          name: request.currentUser.name,
+          surname: request.currentUser.surname,
+        })
+      } else {
+        var objRender = {
+          username: user.username,
+          name: user.name,
+          surname: user.surname,
+          userList: user.friends,
+          button: {
+            add: true,
+            rm: false
+          }
+        }
+        request.currentUser.friends.forEach(friend => {
+          if ( friend === user.username ) {
+            objRender.button.add = false
+            objRender.button.rm = true
+            return
+          }
+        })
+        response.render('profile', objRender)
       }
     })
   }

@@ -3,6 +3,11 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: olive;
+}
+
 .head-block {
   background: black;
   height: 10vh;
@@ -95,10 +100,6 @@ body {
 .menu-profile {
   margin-top: 30%;
   padding: 0;
-}
-
-.menu-profile a {
-  text-decoration: none;
 }
 
 .menu-profile li {

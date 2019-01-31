@@ -44,23 +44,42 @@ class App {
 
     app.get('/profile', this.isAuthenticated, this.loadUser, (request, response) => {
       let user = request.currentUser
-      response.render('profile', {
-        username: user.username,
-        name: user.name,
-        surname: user.surname
-      })
-    })
-
-    app.post('/profile', this.isAuthenticated, this.loadUser, (request, response) => {
-      var user = request.currentUser
-      if ( request.body.searchName != '' ) {
-        this.findUsers(request, response)
+      if ( request.query.people ) {
+        if ( request.query.people === user.username ) {
+          response.redirect('/profile')
+        } else if ( request.query.addfriend ) {
+          user.friends.push(request.query.people)
+          this.userUpdate(user.username, user)
+          response.redirect('/profile')
+        } else if ( request.query.rmfriend ) {
+          user.friends = user.friends.filter(friend => friend !== request.query.people)
+          this.userUpdate(user.username, user)
+          response.redirect('/profile')
+        } else {
+          this.showUser(request, response, request.body.people)
+        }
       } else {
         response.render('profile', {
           username: user.username,
           name: user.name,
-          surname: user.surname
+          surname: user.surname,
+          userList: user.friends
         })
+      }
+    })
+
+    app.post('/profile', this.isAuthenticated, this.loadUser, (request, response) => {
+      if ( request.query.people === undefined ) {
+        var user = request.currentUser
+        if ( request.body.searchName != '' ) {
+          this.findUsers(request, response)
+        } else {
+          response.render('profile', {
+            username: user.username,
+            name: user.name,
+            surname: user.surname
+          })
+        }
       }
     })
 
