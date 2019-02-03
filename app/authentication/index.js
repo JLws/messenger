@@ -155,6 +155,20 @@ module.exports = (lexical, passport) => {
     })
   }
 
+  lexical.startChat = (request, response) => {
+    User.findOne({ username: request.query.name }, (err, user) => {
+      let meUser = request.currentUser
+      response.render('chat', {
+        login: meUser.username,
+        name: meUser.name,
+        surname: meUser.surname,
+        friendlogin: user.username,
+        friendname: user.name,
+        friendsurname: user.surname
+      })
+    })
+  }
+
   // init strategy
   login(passport)
   signup(passport)

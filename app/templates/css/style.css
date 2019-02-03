@@ -152,3 +152,61 @@ a {
 .settings-block td {
   padding: .2em 4em;
 }
+
+.chat {
+  background: black;
+  min-height: 35.4em;
+}
+
+.message-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 64vh;
+  background: green;
+  overflow: auto;
+  word-wrap: break-word;
+}
+
+.form-chat {
+  text-align: center;
+}
+
+.form-chat textarea {
+  width: 90%;
+  height: 4em;
+  resize: none;
+}
+
+.form-chat button {
+  width: 60%;
+  height: 2em;
+}
+
+.friend-info {
+  padding: 1em;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.friend-info span{
+  color: green;
+}
+
+.message-block span {
+  display: block;
+  margin-top: .2em;
+  width: 90%;
+  border-radius: 1em;
+
+  padding: .5em;
+}
+
+.message-me {
+  background: rgb(143,154,23);
+}
+
+.message-friend {
+  background: rgb(43,54,23);
+}

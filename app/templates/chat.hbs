@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A simple messenger</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="head-block">
+    <h2>A simple messenger</h2>
+  </header>
+  <div class="main-block-profile">
+    <div class="profile-info">
+      <h3>{{name}} {{surname}}</h3>
+      <p>{{username}}</p>
+      <ul class="menu-profile">
+        <p>Chat</p>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="settings">Setting profile</a></li>
+        <li><a href="signout">Exit</a></li>
+      </ul>
+    </div>
+    <div class="friends-block">
+      <div class="chat">
+        <div class="friend-info">{{friendname}} {{friendsurname}}({{friendlogin}}) - <span>online</span></div>
+        <div class="message-block">
+          <span class="message-me">Hello</span>
+          <span class="message-friend">Hello</span>
+        </div>
+        <form class="form-chat" method="POST">
+          <textarea name="message"></textarea>
+          <button>Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer class="footer-block">
+  </footer>
+</body>
+</html>

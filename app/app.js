@@ -120,6 +120,14 @@ class App {
     app.post('/settings',this.isAuthenticated, this.loadUser, (request, response) => {
       this.changeUser(request, response)
     })
+
+    app.get('/chat', this.isAuthenticated, this.loadUser, (request, response) => {
+      if ( request.query.name !== undefined ) {
+        this.startChat(request, response)
+      } else {
+        response.redirect('/profile')
+      }
+    })
   }
 }
 
