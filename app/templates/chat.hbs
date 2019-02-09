@@ -12,7 +12,7 @@
   <div class="main-block-profile">
     <div class="profile-info">
       <h3>{{name}} {{surname}}</h3>
-      <p>{{username}}</p>
+      <p id="myname">{{username}}</p>
       <ul class="menu-profile">
         <p>Chat</p>
         <li><a href="profile">Profile</a></li>
@@ -22,19 +22,62 @@
     </div>
     <div class="friends-block">
       <div class="chat">
-        <div class="friend-info">{{friendname}} {{friendsurname}}({{friendlogin}}) - <span>online</span></div>
-        <div class="message-block">
-          <span class="message-me">Hello</span>
-          <span class="message-friend">Hello</span>
+        <div class="friend-info">
+          <span id="friendname">{{friendlogin}}</span><span> - online</span>
+          <h5>{{friendname}} {{friendsurname}}</h5>
         </div>
-        <form class="form-chat" method="POST">
-          <textarea name="message"></textarea>
-          <button>Send</button>
-        </form>
+        <div class="message-block" id="chat">
+        </div>
+        <div class="form-chat">
+          <textarea id="message"></textarea>
+          <button onclick="send()">Send</button>
+        </div>
       </div>
     </div>
   </div>
   <footer class="footer-block">
   </footer>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:3000');
+    var myName = document.getElementById('myname').textContent
+    var friend = document.getElementById('friendname').textContent
+    var chat = document.getElementById('chat')
+
+    socket.on('login', (data) => {
+      if ( data.connected ) {
+        socket.on(data.user, (data) => {
+          let message = document.createElement('span')
+          message.className = 'message-friend'
+          message.textContent = data.sender + ': ' + data.message
+          chat.appendChild(message)
+        })
+      } else {
+        let message = document.createElement('span')
+        message.className = 'message-me'
+        message.textContent = 'Error connection..'
+        chat.appendChild(message)
+      }
+    })
+
+    socket.emit('accept', {
+      name: myName,
+      friendname: friend
+    })
+
+    function send() {
+      var textMessage = document.getElementById('message').value
+      let message = document.createElement('span')
+      document.getElementById('message').value = ''
+      message.className = 'message-me'
+      message.textContent = textMessage
+      chat.appendChild(message)
+      socket.emit('message', {
+        name: myName,
+        message: textMessage,
+        toUser: friend
+      })
+    }
+  </script>
 </body>
 </html>

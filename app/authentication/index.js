@@ -158,8 +158,25 @@ module.exports = (lexical, passport) => {
   lexical.startChat = (request, response) => {
     User.findOne({ username: request.query.name }, (err, user) => {
       let meUser = request.currentUser
+      let findName = () => {
+        let i = 0
+        while ( lexical.onlines.length > i) {
+          if ( lexical.onlines[i].name === meUser.username )
+            return true
+          i++
+        }
+        return false;
+      }
+      while ( !findName() ) {
+        lexical.onlines.push({
+          id: null,
+          name: meUser.username,
+          salt: bcrypt.genSaltSync(5),
+          logged: false
+        })
+      }
       response.render('chat', {
-        login: meUser.username,
+        username: meUser.username,
         name: meUser.name,
         surname: meUser.surname,
         friendlogin: user.username,

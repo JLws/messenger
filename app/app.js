@@ -1,4 +1,6 @@
 const express = require('express')
+const http = require('http')
+const io = require('socket.io')
 const passport = require('passport')
 const bodyParser = require('body-parser')
 const Authentication = require('./authentication')
@@ -9,6 +11,9 @@ const cookieParser = require('cookie-parser')
 class App {
   constructor () {
     this.expressApp = express()
+    this.server = http.Server(this.expressApp)
+    this.socketApp = io(this.server)
+    this.onlines = []
 
     this.expressApp.set('view engine', 'hbs')
     this.expressApp.set('views', 'templates')
